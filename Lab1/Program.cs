@@ -7,11 +7,14 @@
             (long a, long c, long seed, long m) = GetConfigValues();
 
             var lcg = new LinearCongruentialGenerator(a, c, m, seed);
-
-            for (int i = 0; i < 10; i++)
+            var lcg1 = new LinearCongruentialGenerator(a, c, m, seed);
+            for (int i = 0; i < 20; i++)
             {
-                Console.WriteLine(lcg.Next());
+                Console.WriteLine(lcg1.Next());
             }
+
+            long period = lcg.GetPeriod();
+            Console.WriteLine($"Period = {period}");
         }
 
         static (long a, long c, long seed, long m) GetConfigValues()

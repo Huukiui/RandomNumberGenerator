@@ -39,6 +39,7 @@ namespace Lab1
 
                         if (result > 0)
                         {
+                            Console.WriteLine(result);
                             return result;
                         }
                         Console.WriteLine("Result must be greater than zero and not exceed long maximum value. Please try again.");
@@ -63,17 +64,17 @@ namespace Lab1
         {
             while (true)
             {
-                Console.Write("Enter a (2^k or any positive integer): ");
+                Console.Write("Enter a (base^exponent or any positive integer): ");
                 string? input = Console.ReadLine();
-
-                var match = Regex.Match(input, @"^2\^(\d+)$");
+  
+                var match = Regex.Match(input, @"^(\d+)\^(\d+)$");
 
                 if (match.Success)
                 {
-                    if (long.TryParse(match.Groups[1].Value, out long exponent))
+                    if (long.TryParse(match.Groups[1].Value, out long baseNum) && long.TryParse(match.Groups[2].Value, out long exponent))
                     {
-                        long result = (long)Math.Pow(2, exponent);
-
+                        long result = (long)Math.Pow(baseNum, exponent);
+                        Console.WriteLine(result);
                         if (result >= 0 && result < m)
                         {
                             return result;
@@ -82,7 +83,7 @@ namespace Lab1
                     }
                     else
                     {
-                        Console.WriteLine("Invalid exponent or number. Please enter valid integers.");
+                        Console.WriteLine("Invalid base or exponent. Please enter valid integers.");
                     }
                 }
                 else if (long.TryParse(input, out long value) && value > 0)
@@ -95,5 +96,6 @@ namespace Lab1
                 }
             }
         }
+
     }
 }

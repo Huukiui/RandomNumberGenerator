@@ -26,5 +26,29 @@ namespace Lab1
             _seed = (_a * _seed + _c) % _m;
             return _seed;
         }
+
+        public long GetPeriod()
+        {
+            var initialSeed = _seed;
+            var firstNumber = Next();
+            var previousNumber = 0L;
+            var currentNumber = firstNumber;
+            var period = 1;
+
+            HashSet<long> seenValues = new HashSet<long>();
+
+            while(true)
+            {
+                previousNumber = currentNumber;
+                currentNumber = Next();
+                if(currentNumber == previousNumber || currentNumber == initialSeed || currentNumber == firstNumber)
+                {
+                    break;
+                }
+                period++;
+            }
+
+            return period;
+        }
     }
 }
