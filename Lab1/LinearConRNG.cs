@@ -8,6 +8,7 @@ namespace Lab1
 {
     class LinearCongruentialGenerator
     {
+        private long _backupSeed;
         private long _seed;
         private long _a;
         private long _c;
@@ -19,8 +20,9 @@ namespace Lab1
             _c = c;
             _m = m;
             _seed = seed;
+            _backupSeed = seed;
         }
-
+        public void Reset() => _seed = _backupSeed;
         public long Next()
         {
             _seed = (_a * _seed + _c) % _m;
